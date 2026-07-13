@@ -10,7 +10,7 @@ java {
 }
 repositories { mavenCentral(); mavenLocal() }
 dependencies {
-    api 'za.co.fnb.dcre:dcre-platform-model:0.1.0'
+    api 'za.co.fnb.dcre:platform-model:0.1.0'
 
     testImplementation platform('org.junit:junit-bom:6.0.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
