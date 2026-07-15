@@ -104,7 +104,7 @@ section 3 and exercises the R-31 grammar plus the `StagedWrite` restart no-op;
 `ExchangeLayoutTest` covers happy-path resolution, all three fail-closed cases, leaf-dir
 enumeration and channel-token round-trips.
 
-## Distribution into the local cluster
+## Local cluster deployment
 
 There is no image for this repo: it reaches the kind cluster inside the stage-service images.
 After `./gradlew publishToMavenLocal` here, each service's `./gradlew bootJar` resolves the jar
