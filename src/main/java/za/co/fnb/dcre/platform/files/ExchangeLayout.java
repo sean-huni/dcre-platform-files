@@ -12,6 +12,16 @@ import java.util.Objects;
  * (client, channel, sub) triple to an absolute path under {@code root} from
  * explicit relative paths. Fail-closed: an unconfigured triple throws rather
  * than silently falling back to a shared or wrong directory.
+ *
+ * <p>Latent-dir capture contract (SCRUM-58): the dormant {@code error/} and
+ * {@code archive/} out-dir leaves this layout resolves carry a capture
+ * obligation. Any future producer landing a file in one of them MUST, BEFORE
+ * the move: (1) write-ahead a filename row in its owner table keyed by the
+ * full business identity; (2) add a {@code v_file_index} arm; (3) use the
+ * reserved step names {@code MOVED_TO_ERROR} / {@code MOVED_TO_ARCHIVE} with
+ * direction and route per the 11-column view contract. Spec:
+ * {@code design-register/docs/specs/2026-07-16-file-trace-design.md},
+ * section 4 gap 4 (F3).
  */
 public final class ExchangeLayout {
 
