@@ -1,8 +1,11 @@
 package za.co.fnb.dcre.platform.files;
 
 /**
- * The five exchange channels (SCRUM-42). The token is the on-disk `<channel>`
- * path segment and equals the AGT route id for inbound channels.
+ * The exchange channels (SCRUM-42 collections five + SCRUM-73 mandates four).
+ * The token is the on-disk `<channel>` path segment and equals the AGT route
+ * id for inbound channels. Mandate flows get dedicated channels end to end so
+ * flow separation stays aligned with the dcre-man namespace; collections
+ * channels are untouched.
  */
 public enum ExchangeChannel {
 
@@ -10,7 +13,11 @@ public enum ExchangeChannel {
     ONHOST_REQ_ENDO("onhost-req-endo"),
     ONHOST_RESP("onhost-resp"),
     FINT_REQ("fint-req"),
-    FINT_RESP("fint-resp");
+    FINT_RESP("fint-resp"),
+    ONHOST_REQ_MAN("onhost-req-man"),
+    ONHOST_RESP_MAN("onhost-resp-man"),
+    FINT_REQ_MAN("fint-req-man"),
+    FINT_RESP_MAN("fint-resp-man");
 
     private final String token;
 
