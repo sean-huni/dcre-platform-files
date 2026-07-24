@@ -17,6 +17,13 @@ class LayoutsTest {
         "0002DCRERF2026071112000002             202607111200 00000000000030FNBRF01                            20260711                                                            ";
     static final String DETAIL =
         "01FNBRF00001-62681769356319023       62681769356319023      CT0000000001  ZAR000000000117710250205     FNB REVOLVING FACILITY             62681769356319023      DDA RCUR";
+    // V3 = the V2 body (169) plus a trailing mandate_ref(35), left-aligned space-filled.
+    static final String MANDATE_REF = "MND0000000042";
+    static final String DETAIL_V3_LINE = DETAIL + pad(MANDATE_REF, 35);
+
+    private static String pad(final String value, final int width) {
+        return value + " ".repeat(width - value.length());
+    }
 
     @Test
     void headerFieldsSliceToAttestedValues() {
@@ -39,6 +46,29 @@ class LayoutsTest {
         assertEquals("ZAR", Layouts.DETAIL_V2.slice(DETAIL, "currency"));
         assertEquals("62681769356319023", Layouts.DETAIL_V2.slice(DETAIL, "debtor_account").strip());
         assertEquals("DDA RCUR", Layouts.DETAIL_V2.slice(DETAIL, "acc_type_seq"));
+    }
+
+    @Test
+    void detailV3AppendsMandateRefAndKeepsV2Body() {
+        assertEquals(204, Layouts.DETAIL_V3.length());
+        assertEquals(DETAIL_V3_LINE.length(), Layouts.DETAIL_V3.length());
+        // trailing mandate_ref slices to the attested value
+        assertEquals(MANDATE_REF, Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "mandate_ref").strip());
+        // the V2 body is a byte-exact prefix: every V2 field slices identically under V3
+        assertEquals("01", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "record_type"));
+        assertEquals("62681769356319023", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "creditor_account").strip());
+        assertEquals("ZAR", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "currency"));
+        assertEquals("62681769356319023", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "debtor_account").strip());
+        assertEquals("DDA RCUR", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "acc_type_seq"));
+        assertEquals("CT0000000001", Layouts.DETAIL_V3.slice(DETAIL_V3_LINE, "contract_ref").strip());
+    }
+
+    @Test
+    void olderLayoutsUnchangedByV3() {
+        // V1/V2 lengths are frozen so older files still parse after V3 lands
+        assertEquals(161, Layouts.DETAIL_V1.length());
+        assertEquals(169, Layouts.DETAIL_V2.length());
+        assertEquals("62681769356319023", Layouts.DETAIL_V2.slice(DETAIL, "debtor_account").strip());
     }
 
     @Test
