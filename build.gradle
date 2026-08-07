@@ -12,6 +12,17 @@ java {
 repositories { mavenCentral(); mavenLocal() }
 dependencies {
     api 'za.co.fnb.dcre:platform-model:0.1.0'
+    // Generic fixed-width slicing and the recovered copybook tables live in
+    // platform-copybook; this module keeps the family-specific exchange plumbing
+    // (ExchangeLayout, R31Filename, StagedWrite). Specific depends on generic,
+    // which is the family topology the copybook brief specifies.
+    //
+    // `implementation`, NOT `api`, and there is currently ZERO code reference from
+    // this module to platform-copybook: nothing here should re-export the copybook
+    // types, because a consumer that inherits them transitively never declares them
+    // and drifts silently. crr, mrr and ctv each declare platform-copybook for
+    // themselves (12FactorApp Alignment Factor II, https://12factor.net/dependencies).
+    implementation 'za.co.fnb.dcre:platform-copybook:0.1.0'
 
     testImplementation platform('org.junit:junit-bom:6.0.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
