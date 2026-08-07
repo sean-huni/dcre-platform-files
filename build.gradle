@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 group = 'za.co.fnb.dcre'
-version = '0.1.0'
+version = '0.2.0'
 java {
     sourceCompatibility = JavaVersion.VERSION_25
     targetCompatibility = JavaVersion.VERSION_25
@@ -22,7 +22,7 @@ dependencies {
     // types, because a consumer that inherits them transitively never declares them
     // and drifts silently. crr, mrr and ctv each declare platform-copybook for
     // themselves (12FactorApp Alignment Factor II, https://12factor.net/dependencies).
-    implementation 'za.co.fnb.dcre:platform-copybook:0.1.0'
+    implementation 'za.co.fnb.dcre:platform-copybook:0.2.0'
 
     testImplementation platform('org.junit:junit-bom:6.0.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
