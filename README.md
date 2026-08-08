@@ -11,13 +11,16 @@ exchange root (the `clientbase/channel/{in,out,error,archive}` contract, SCRUM-4
 an unconfigured triple throws instead of falling back to a shared or wrong directory. Alongside
 it live the fixed-width OnHost record layouts (`Layouts`), the stage-then-rename boundary write
 (`StagedWrite`, R-24) and the inbound filename grammar (`R31Filename`, R-31). It is consumed by
-`dcre-platform-batch` (as `api`, so every stage service inherits it) and directly by `dcre-prg`.
+`dcre-platform-batch` (as `api`, so every stage service inherits it) and directly by `dcre-crg`, the collections report generator.
 
 ## Key classes
 
-- `ExchangeChannel`: the five channels; the token is the on-disk path segment and equals the AGT
-  route id for inbound channels: `onhost-req`, `onhost-req-endo`, `onhost-resp`, `fint-req`,
-  `fint-resp`.
+- `ExchangeChannel`: the nine channels; the token is the on-disk path segment and equals the AGT
+  route id for inbound channels. Collections: `onhost-req`, `onhost-req-endo`, `onhost-resp`,
+  `fint-req`, `fint-resp`. Mandates: `onhost-req-man`, `onhost-resp-man`, `fint-req-man`,
+  `fint-resp-man`. The payments family has no channels of its own yet: it still rides
+  `onhost-req-endo`, which the family split renames to `onhost-req-pay` and pairs with a new
+  `fint-resp-pay`. That rename is an AGT and payments-family change, not a platform-files one.
 - `ExchangeSub`: the lifecycle subdirectory under a channel: `in`, `out`, `error`, `archive`.
 - `ExchangeLayout`: immutable per-client directory map built from explicit relative paths;
   `resolve(client, channel, sub)` fails closed with `IllegalArgumentException`, `allLeafDirs()`
@@ -125,11 +128,11 @@ artifact version (`0.1.0`) is unchanged.
 - https://github.com/sean-huni/dcre-cde
 - https://github.com/sean-huni/dcre-cir
 - https://github.com/sean-huni/dcre-crw
-- https://github.com/sean-huni/dcre-ixr
-- https://github.com/sean-huni/dcre-sxr
-- https://github.com/sean-huni/dcre-pxr
-- https://github.com/sean-huni/dcre-prg
-- https://github.com/sean-huni/dcre-ais
+- https://github.com/sean-huni/dcre-cix
+- https://github.com/sean-huni/dcre-csx
+- https://github.com/sean-huni/dcre-cpx
+- https://github.com/sean-huni/dcre-crg
+- https://github.com/sean-huni/dcre-pai
 - https://github.com/sean-huni/dcre-hcs
 - https://github.com/sean-huni/dcre-infra (kind cluster, exchange hostPath, version switching)
 - https://github.com/sean-huni/dcre-fixture-toolkit (dev-normative layout source)
