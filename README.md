@@ -116,22 +116,6 @@ artifact version (`0.1.0`) is unchanged.
 
 ## Related repositories
 
-- https://github.com/sean-huni/dcre-agt (orchestrator: DirectoryWatcher, job minting)
-- https://github.com/sean-huni/dcre-platform-model
-- https://github.com/sean-huni/dcre-platform-batch
-- https://github.com/sean-huni/dcre-platform-persistence
-- https://github.com/sean-huni/dcre-crr
-- https://github.com/sean-huni/dcre-ctv
-- https://github.com/sean-huni/dcre-cde
-- https://github.com/sean-huni/dcre-cir
-- https://github.com/sean-huni/dcre-crw
-- https://github.com/sean-huni/dcre-ixr
-- https://github.com/sean-huni/dcre-sxr
-- https://github.com/sean-huni/dcre-pxr
-- https://github.com/sean-huni/dcre-prg
-- https://github.com/sean-huni/dcre-ais
-- https://github.com/sean-huni/dcre-hcs
-- https://github.com/sean-huni/dcre-infra (kind cluster, exchange hostPath, version switching)
-- https://github.com/sean-huni/dcre-fixture-toolkit (dev-normative layout source)
-- https://github.com/sean-huni/dcre-design-register (R-/A- register items cited above)
-- https://github.com/sean-huni/dcre-rpt
+The complete, current list of live DCRE repositories (stage services, orchestrator, platform libraries, infra and tooling) lives in one place: the [DCRE design register README](https://github.com/sean-huni/dcre-design-register#repositories). Deprecated and archived repositories are deliberately absent from it. This README does not copy that list, so it cannot drift.
+
+- Design register: https://github.com/sean-huni/dcre-design-register (start at `docs/specs/DESIGN-REGISTER.md`; the diagrams in `docs/diagrams/` are the specification)
