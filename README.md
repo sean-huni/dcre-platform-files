@@ -96,8 +96,7 @@ dependencies {
 
 `platform-model` arrives transitively via `api`. After `publishToMavenLocal`, each service's
 `./gradlew bootJar` resolves the jar from Maven Local and its image build bakes it in (see
-`dcre-infra` for the fleet quickstart). Fleet release tags (digits-only SemVer) are applied to this
-repo uniformly with the rest of the fleet and are independent of the artifact version `0.1.0`.
+`dcre-infra` for the fleet quickstart). Release tags (digits-only three-component SemVer, no `v` prefix) are independent of the artifact version `0.1.0`; this repo carries 1.0.0 through 2.2.1, and tagging is not uniform across the fleet (`git ls-remote --tags`, checked 2026-09-28).
 
 ## Configuration
 
